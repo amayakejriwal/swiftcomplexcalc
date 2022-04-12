@@ -4,6 +4,92 @@ print("Welcome back to the UW Calculator")
 // below both compile and return "true"
 class Calculator {
     
+    // adding 2 ints
+    func add(lhs left : Int, rhs right : Int) -> Int {
+        return left + right
+    }
+    
+    // adding an array of ints
+    func add(_ args: [Int]) -> Int {
+        var result = 0
+        for num in args {
+            result += num
+        }
+        return result
+    }
+    
+    // adding a touple of ints
+    func add(lhs left: (Int, Int), rhs right: (Int, Int)) -> (Int, Int) {
+        return (left.0 + right.0, left.1 + right.1)
+    }
+    
+    // adding a dict of ints
+    func add(lhs left: [String: Int], rhs right: [String: Int]) -> [String: Int] {
+        let xReturn = left["x"]! + right["x"]!
+        let yReturn = left["y"]! + right["y"]!
+        return (["x": xReturn, "y": yReturn])
+    }
+    
+    // subtracting 2 ints
+    func subtract(lhs left : Int, rhs right : Int) -> Int {
+        return left - right
+    }
+    
+    // subtracting a touple of ints
+    func subtract(lhs left: (Int, Int), rhs right: (Int, Int)) -> (Int, Int) {
+        return (left.0 - right.0, left.1 - right.1)
+    }
+    
+    // subtracting a dict of ints
+    func subtract(lhs left: [String: Int], rhs right: [String: Int]) -> [String: Int] {
+        let xReturn = left["x"]! - right["x"]!
+        let yReturn = left["y"]! - right["y"]!
+        return (["x": xReturn, "y": yReturn])
+    }
+    
+    // multiplying 2 ints
+    func multiply(lhs left : Int, rhs right : Int) -> Int {
+        return left * right
+    }
+    
+    // multiplying an array of ints
+    func multiply(_ args: [Int]) -> Int {
+        var result = 1
+        for num in args {
+            result *= num
+        }
+        return result
+    }
+    
+    // dividing 2 ints
+    func divide(lhs left : Int, rhs right : Int) -> Int {
+        return left / right
+    }
+    
+    // counting an array of ints
+    func count(_ args: [Int]) -> Int {
+        var count = 0
+        for _ in args {
+            count += 1
+        }
+        return count
+    }
+    
+    // finding the avg of an array of ints
+    func avg(_ args: [Int]) -> Int {
+        let count = count(args)
+        if count > 0 {
+            var sum = 0
+            for num in args {
+                sum += num
+            }
+            return sum / count
+        }
+        return count
+    }
+    
+    // func mathOp(lhs left: Int, rhs right: Int, op operation: ) -> Int {}
+    
 }
 
 let calc = Calculator()  // Don't change this declaration name; it's used in all the tests below
@@ -17,7 +103,7 @@ calc.subtract(lhs: 2, rhs: 2) == 0
 calc.multiply(lhs: 2, rhs: 2) == 4
 calc.divide(lhs: 2, rhs: 2) == 1
 
-calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rjs) + (lhs * rhs) }) == 35
+calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rhs) + (lhs * rhs) }) == 35
     // This style is one way of writing an anonymous function
 calc.mathOp(lhs: 10, rhs: -5, op: { ($0 + $1) + ($0 - $1) }) == 20
     // This is the second, more terse, style; either works
@@ -50,3 +136,4 @@ let pd1 = ["x": 5, "y": 5]
 let pd2 = ["x": -4, "y": 4]
 calc.add(lhs: pd1, rhs: pd2) == ["x": 1, "y": 9]
 calc.subtract(lhs: pd1, rhs: pd2) == ["x": 9, "y": 1]
+
