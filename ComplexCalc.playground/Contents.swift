@@ -88,13 +88,40 @@ class Calculator {
         return count
     }
     
-    // func mathOp(lhs left: Int, rhs right: Int, op operation: ) -> Int {}
+    // mathOp function for Int params
+    func mathOp(lhs left: Int, rhs right: Int, op operation: (Int, Int) -> Int) -> Int {
+        return operation(left, right)
+    }
     
+    // mathOp function for [Int] params
+    func mathOp(args a: [Int], beg b: Int, op operation: (Int, Int) -> Int) -> Int {
+        var result = 0
+        for num in a {
+            result += operation(num, b)
+        }
+        if b > 0 {
+            result = result / count(a)
+        }
+        return result
+    }
 }
 
 let calc = Calculator()  // Don't change this declaration name; it's used in all the tests below
 
 // ====> Add your own tests here if you wish <====
+
+// my tests to print out the values of the mathOp function calls to make sure that they are all correct
+let t1 = calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rhs) + (lhs * rhs) }) // 35
+print(t1)
+let t2 = calc.mathOp(lhs: 10, rhs: -5, op: { ($0 + $1) + ($0 - $1) }) // 20
+print(t2)
+let t3 = calc.mathOp(args: [1, 2, 3], beg: 0, op: { $0 + $1 }) // 6
+print(t3)
+let t4 = calc.mathOp(args: [1, 2, 3, 4, 5], beg: 0, op: { $0 + $1 }) // 15
+print(t4)
+let t5 = calc.mathOp(args: [1, 1, 1, 1, 1], beg: 1, op: { $0 * $1 }) // 1
+print(t5)
+// all of the mathOp function calls are correct!
 
 
 // ====> Do not modify code in this section <====
